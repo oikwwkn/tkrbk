@@ -1,28 +1,17 @@
-// Mobile navigation toggle
 const navToggle = document.getElementById("navToggle");
 const navMenu = document.getElementById("navMenu");
+const navLinks = document.querySelectorAll("#navMenu a");
 
-navToggle.addEventListener("click", () => {
-  navMenu.classList.toggle("open");
-  navToggle.classList.toggle("active");
-});
+if (navToggle && navMenu) {
+  navToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("open");
+    navToggle.classList.toggle("active");
+  });
 
-// Simple contact-form feedback
-const contactForm = document.getElementById("contactForm");
-if (contactForm) {
-  contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const res = await fetch(contactForm.action, {
-      method: "POST",
-      body: new FormData(contactForm),
-      headers: { Accept: "application/json" },
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      navToggle.classList.remove("active");
     });
-
-    if (res.ok) {
-      alert("メッセージを送信しました。ありがとうございます！");
-      contactForm.reset();
-    } else {
-      alert("送信できませんでした。時間をおいて再度お試しください。");
-    }
   });
 }
